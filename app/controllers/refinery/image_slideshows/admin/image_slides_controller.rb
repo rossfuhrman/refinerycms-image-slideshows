@@ -13,7 +13,7 @@ module Refinery
         end
 
         def create
-          @image_slide.position = Refinery::ImageSlideshows::ImageSlide.maximum(:position) + 1
+          @image_slide.position = max_position + 1
 
           if @image_slide.valid? && @image_slide.save
             redirect_to image_slides_path, :notice => 'Image slide was successfully created.'
@@ -53,6 +53,10 @@ module Refinery
 
         def find_image_slides
           @image_slides = @image_slideshow.image_slides.order(:position) if @image_slideshow.present?
+        end
+
+        def max_position
+          Refinery::ImageSlideshows::ImageSlide.maximum(:position) ||= 0
         end
 
       end
