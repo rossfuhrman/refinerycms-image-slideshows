@@ -56,7 +56,7 @@ module Refinery
         end
 
         def max_position
-          Refinery::ImageSlideshows::ImageSlide.maximum(:position) ||= 0
+          Refinery::ImageSlideshows::ImageSlide.maximum(:position) || 0
         end
 
       end
